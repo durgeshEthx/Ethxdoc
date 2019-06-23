@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Data</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<center>
+		<!--Grid row-->
+		<div class="row d-flex justify-content-center">
+
+			<!--Grid column-->
+			<div class="col-md-6">
+
+				<!-- <div id="wrapper"> -->
+				<!-- <div class="col" id="droppable"></div> -->
+				<!-- <div class="col" id="col1"> -->
+				<div id="drag-list" class="drag-list">
+					<ul class="list-inline">
+						<li><span id="drag1" class="drag">
+								<%=name%>
+								<!-- <img src="http://placehold.it/80x80/c9112d/fff&text=1" width="100%" height="100%" /> -->
+							</span>
+						</li>
+						<li><span id="drag2" class="drag">
+								Signature
+								<!-- <img src="http://placehold.it/80x80/E68500/fff&text=2" width="100%" height="100%" /> -->
+							</span>
+						</li>
+						<li><span id="drag3" class="drag">
+								Initals
+								<!-- <img src="http://placehold.it/80x80/00810C/fff&text=3" width="100%" height="100%" /> -->
+							</span>
+						</li>
+						<li>
+							<span id="drag4" class="drag">
+								Date
+								<!-- <img src="http://placehold.it/80x80/00810C/fff&text=3" width="100%" height="100%" /> -->
+							</span>
+						</li>
+					</ul>
+				</div>
+				<!-- </div> -->
+				<!-- </div> -->
+
+
+
+				<!-- <ul class="list-inline">
+			<li class="draggable">
+					Name
+				</li>
+			<li class="list-inline-item">Signature</li>
+			<li class="list-inline-item">Initials</li>
+			<li class="list-inline-item">Date</li>
+		</ul> -->
+
+				<div class="col" id="droppable">
+					<!-- <h1><%= imgname %></h1> -->
+					<!-- <img id="img0" src="data:image/png;base64,\"imgbas64 \""  alt="\"imgbas64 \""/> -->
+					<img id="i" src="<%=imgpath%>" />
+
+				</div>
+
+			</div>
+			<!--Grid column-->
+
+		</div>
+	</center>
+	<script>
+		//document.getElementById('i').src='/images'+imgname;
+		//console.log('imagename '+imgname);
+		var x = null;
+		//Make element draggable
+		$(".drag").draggable({
+			helper: 'clone',
+			cursor: 'move',
+			tolerance: 'fit',
+			revert: true
+		});
+
+		$("#droppable").droppable({
+			accept: '.drag',
+			activeClass: "drop-area",
+			drop: function (e, ui) {
+				if ($(ui.draggable)[0].id != "") {
+
+
+					x = ui.helper.clone();
+					ui.helper.remove();
+					x.draggable({
+						helper: 'original',
+						cursor: 'move',
+						//containment: '#droppable',
+						tolerance: 'fit',
+						drop: function (event, ui) {
+							$(ui.draggable).remove();
+						}
+					});
+
+					x.resizable({
+						maxHeight: $('#droppable').height(),
+						maxWidth: $('#droppable').width()
+					});
+					x.addClass('remove');
+					var el = $("<span><a href='Javascript:void(0)' class=\"xicon delete\" title=\"Remove\">X</a></span>");
+					$(el).insertAfter($(x.find('img')));
+					x.appendTo('#droppable');
+					$('.delete').on('click', function () {
+						$(this).parent().parent('span').remove();
+					});
+					$('.delete').parent().parent('span').dblclick(function () {
+						$(this).remove();
+					});
+				}
+			}
+		});
+
+		$("#remove-drag").droppable({
+			drop: function (event, ui) {
+				$(ui.draggable).remove();
+			},
+			hoverClass: "remove-drag-hover",
+			accept: '.remove'
+		});
+
+	</script>
+
+	<!--Grid row-->
+</body>
+
+</html>

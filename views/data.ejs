@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Data</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script>
+	<div class="col-md-4 col-md-offset-4">
+		<div>
+			<p>Welcome </p>
+		</div>
+		<div>
+			<center>
+				<table class="table table-hover text-center">
+					<!-- <tr><td>Name </td><td><%= name %></td></tr> -->
+					<tr>
+						<td>Email </td>
+						<td><%= email %></td>
+					</tr>
+				</table>
+
+				<!-- <a href="#" class="btn btn-info" role="button">Link Button</a> -->
+				<button id="signdocs" onClick="$('#doc_signee_details').toggle();" type="button"
+					class="btn btn-primary">Sign Documents</button>
+
+				<!--  -->
+				<div class="col-xs-12 collapse " id="doc_signee_details">
+					<div class="col-md-12">
+						<h3>Signee Details</h3>
+						<form id="fileupload" action="/upload" enctype="multipart/form-data" method="POST">
+							<input type="file" name="photo" />
+							<input type="submit" value="Upload a file" />
+						</form>
+						<div id="field">
+							<div id="field0">
+								<!-- Text input-->
+								<form action="/signd" method="POST" id="form1"  >
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="action_id">Name</label>
+										<div class="col-md-5">
+											<input id="action_id" name="name" type="text" placeholder=""
+												class="form-control input-md">
+
+										</div>
+
+										<br><br>
+										<!-- Email input-->
+										<div class="form-group">
+											<label class="col-md-4 control-label" for="action_name">Email</label>
+											<div class="col-md-5">
+												<input id="action_name" name="email" type="email" placeholder=""
+													class="form-control input-md">
+
+											</div>
+										</div>
+
+			
+									</div>
+							</div>
+
+						</div>
+						<!-- Button -->
+						<div class="form-group ">
+							<div class="col-md-4 ">
+								<button id="add-more" name="add-more" class="btn btn-primary pull-right">Add
+									More</button>
+							</div>
+						</div>
+						<button id="preaprebtn" class="btn btn-primary" type="submit">Prepare Documents to Sign</button>
+						<!-- <a  href="/signd" id="preaprebtn" class="btn btn-primary collapse">Prepare Documents to Sign</a> -->
+						</form>
+						<br><br>
+
+					</div>
+				</div>
+		</div>
+		<!-- <form action="/sign" method="POST">
+
+			<p>Park Name: <input type="text" name = "parkName" placeholder = "Park Name"></p>
+	
+			<p>Park Picture: <input type="text" name = "parkImage" placeholder="Image URL"></p>
+			<button type="submit">Add</button>
+	
+			<a href="/sign"><button>Add to My Memories</button></a>
+	
+		 </form> -->
+		<!--  -->
+		<!-- <a id="preaprebtn" href="/sign_document" type="button" class="btn btn-primary collapse">Prepare Documents to
+			Sign</a> -->
+		<!-- <button class="btn btn-primary collapse" id="preaprebtn">Prepare Documents to Sign</button> -->
+		<!-- <a data-fancybox="gallery" href="big_1.jpg">
+			<img src="small_1.jpg">
+	</a>
+	
+	<a data-fancybox="gallery" href="big_2.jpg"> -->
+		<!-- <img src="small_2.jpg"> -->
+		<!-- <div class="form-group" id="popup"><h1>heading...</h1></div>
+	</a>	 -->
+		</center>
+
+		<script>
+			// wait for the DOM to be loaded 
+			$(document).ready(function () {
+				// bind 'myForm' and provide a simple callback function 
+				$('#fileupload').ajaxForm(function () {
+					console.log('logged');
+					alert("Thank you for your comment!");
+				});
+			});
+			function test() {
+				var x = document.getElementById("doc_signee_details1");
+				if (x.style.display === "none") {
+					x.style.display = "block";
+				}
+
+			}
+
+			// add multiple fields
+			var next = 0;
+			$("#add-more").click(function (e) {
+				e.preventDefault();
+				var addto = "#field" + next;
+				var addRemove = "#field" + (next);
+				next = next + 1;
+				var newIn = ' <div id="field' + next + '" name="field' + next + '"><!-- Text input--><div class="form-group"> <label class="col-md-4 control-label" for="action_id">Name</label> <div class="col-md-5"> <input id="action_id" name="action_id" type="text" placeholder="" class="form-control input-md"> </div></div><br><br> <!-- Text input--><div class="form-group"> <label class="col-md-4 control-label" for="action_name">Email</label> <div class="col-md-5"> <input id="action_name" name="action_name" type="text" placeholder="" class="form-control input-md"> </div></div><br><br></div>';
+				var newInput = $(newIn);
+				var removeBtn = '<button id="remove' + (next - 1) + '" class="btn btn-danger remove-me" >Remove</button></div></div><div id="field">';
+				var removeButton = $(removeBtn);
+				$(addto).after(newInput);
+				$(addRemove).after(removeButton);
+				$("#field" + next).attr('data-source', $(addto).attr('data-source'));
+				$("#count").val(next);
+
+				$('.remove-me').click(function (e) {
+					e.preventDefault();
+					var fieldNum = this.id.charAt(this.id.length - 1);
+					var fieldID = "#field" + fieldNum;
+					$(this).remove();
+					$(fieldID).remove();
+				});
+			});
+			// $('signdocs').on('click',function(){
+			// 	console.log("www"); 
+			// 		 	$.post('/signdocs', {data: 'blah'}, function (data) {
+			//  	console.log(data);
+			//    });
+
+
+			// });
+			// $('signdocs').click(function () {
+			// 	$.post('/signdocs', {data: 'blah'}, function (data) {
+			// 	console.log(data);
+			//   });
+			// }, 'json');
+
+			// $('#signdocs').hide();
+			$("#signdocs").click(function () {
+
+				$("#signdocs").hide();
+				$('#preaprebtn').show();
+			});
+
+			$('#preaprebtn').click(function (e) {
+				console.log('clicked');
+
+
+			});
+
+		</script>
+	</div>
+	<div class="abc">
+		<a href="/logout">Logout</a>
+	</div>
+	</div>
+</body>
+
+</html>

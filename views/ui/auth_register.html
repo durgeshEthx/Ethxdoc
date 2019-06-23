@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>trsts.co- Digitally sign documents on blockchain</title>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+	<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+	<meta charset="utf-8">
+	<meta content="ie=edge" http-equiv="x-ua-compatible">
+	<meta content="template language" name="keywords">
+	<meta content="Tamerlan Soziev" name="author">
+	<meta content="Admin dashboard html template" name="description">
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<link href="ui/favicon.png" rel="shortcut icon">
+	<link href="ui/apple-touch-icon.png" rel="apple-touch-icon">
+	<link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet" type="text/css">
+	<link href="ui/bower_components/select2/dist/css/select2.min.css" rel="stylesheet">
+	<link href="ui/bower_components/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+	<link href="ui/bower_components/dropzone/dist/dropzone.css" rel="stylesheet">
+	<link href="ui/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+	<link href="ui/bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
+	<link href="ui/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css" rel="stylesheet">
+	<link href="ui/bower_components/slick-carousel/slick/slick.css" rel="stylesheet">
+	<link href="ui/css/main.css?version=4.4.0" rel="stylesheet">
+	<link href="ui/icon_fonts_assets/feather/style.css" rel="stylesheet">
+
+	<!-- <script type="text/javascript">
+	console.log('efe');
+			$(document).ready(function(){
+		
+		$( "#regform" ).submit(function(event) {
+			event.preventDefault();
+			
+			$.ajax({
+				type: 'POST',
+				url: '/',
+				data: $('#regform').serialize(),
+				dataType: "json",
+				success: function(response){
+					alert("a");
+					console.log(response.Success);
+					$('#regform')[0].reset();
+					console.log('ready');
+					document.getElementById("check").innerHTML=response.Success;
+						 //ADD THIS CODE
+						 setTimeout(function(){
+							 document.getElementById("check").innerHTML="";
+						 },3000);
+						 if (response.Success=="You are regestered,You can login now.") {
+							 console.log('aa');
+							 document.getElementById("aa").click();
+						 };
+					 },
+					 error: function() {
+					 }
+				 })
+		});
+		});
+			</script>  -->
+	<!-- <script src="https://www.google.com/recaptcha/api.js?render=6LegEqkUAAAAAM26uqgIyMEXH5ujQDY53okuRKgB "></script> -->
+
+</head>
+
+
+<body class="auth-wrapper">
+	<div class="all-wrapper menu-side with-pattern">
+		<div class="auth-box-w">
+			<div class="logo-w">
+				<a href="index.html">
+					<h2><i class="icon-feather-check-square text-primary"></i> trsts</h2>
+				</a>
+			</div>
+			<h4 class="auth-header">
+				You're just a step away!
+			</h4>
+			<form id="formreg" action="/" method="POST">
+				<div class="form-group">
+					<label for=""> Full Name</label><input class="form-control" type="text" name="username" id="name">
+					<div class="pre-icon os-icon os-icon-user-male-circle2"></div>
+				</div>
+				<div class="form-group">
+					<label for=""> Email address</label><input class="form-control" type="email" name="email" id="email">
+					<div class="pre-icon os-icon os-icon-email-2-at2"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for=""> Password</label><input class="form-control" type="password" name="password"
+								id="pass1" onkeyup="checkPass(); return false;">
+							<div class="pre-icon os-icon os-icon-fingerprint"></div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="">Confirm Password</label><input class="form-control" type="password"
+								name="passwordConf" id="pass2" onkeyup="checkPass(); return false;">
+						</div>
+					</div>
+					<div id="error-nwl"></div>
+				</div>
+				<div class="form-group">
+					<label for="">Country</label>
+					<div class="pre-icon os-icon os-icon-arrow-right4"></div>
+					<select class="form-control" id="Country" name="country">
+						<option></option>
+						<option value="AF">Afghanistan</option>
+						<option value="AX">Åland Islands</option>
+						<option value="AL">Albania</option>
+						<option value="DZ">Algeria</option>
+						<option value="AS">American Samoa</option>
+						<option value="AD">Andorra</option>
+						<option value="AO">Angola</option>
+						<option value="AI">Anguilla</option>
+						<option value="AQ">Antarctica</option>
+						<option value="AG">Antigua and Barbuda</option>
+						<option value="AR">Argentina</option>
+						<option value="AM">Armenia</option>
+						<option value="AW">Aruba</option>
+						<option value="AU">Australia</option>
+						<option value="AT">Austria</option>
+						<option value="AZ">Azerbaijan</option>
+						<option value="BS">Bahamas</option>
+						<option value="BH">Bahrain</option>
+						<option value="BD">Bangladesh</option>
+						<option value="BB">Barbados</option>
+						<option value="BY">Belarus</option>
+						<option value="BE">Belgium</option>
+						<option value="BZ">Belize</option>
+						<option value="BJ">Benin</option>
+						<option value="BM">Bermuda</option>
+						<option value="BT">Bhutan</option>
+						<option value="BO">Bolivia, Plurinational State of</option>
+						<option value="BQ">Bonaire, Sint Eustatius and Saba</option>
+						<option value="BA">Bosnia and Herzegovina</option>
+						<option value="BW">Botswana</option>
+						<option value="BV">Bouvet Island</option>
+						<option value="BR">Brazil</option>
+						<option value="IO">British Indian Ocean Territory</option>
+						<option value="BN">Brunei Darussalam</option>
+						<option value="BG">Bulgaria</option>
+						<option value="BF">Burkina Faso</option>
+						<option value="BI">Burundi</option>
+						<option value="KH">Cambodia</option>
+						<option value="CM">Cameroon</option>
+						<option value="CA">Canada</option>
+						<option value="CV">Cape Verde</option>
+						<option value="KY">Cayman Islands</option>
+						<option value="CF">Central African Republic</option>
+						<option value="TD">Chad</option>
+						<option value="CL">Chile</option>
+						<option value="CN">China</option>
+						<option value="CX">Christmas Island</option>
+						<option value="CC">Cocos (Keeling) Islands</option>
+						<option value="CO">Colombia</option>
+						<option value="KM">Comoros</option>
+						<option value="CG">Congo</option>
+						<option value="CD">Congo, the Democratic Republic of the</option>
+						<option value="CK">Cook Islands</option>
+						<option value="CR">Costa Rica</option>
+						<option value="CI">Côte d'Ivoire</option>
+						<option value="HR">Croatia</option>
+						<option value="CU">Cuba</option>
+						<option value="CW">Curaçao</option>
+						<option value="CY">Cyprus</option>
+						<option value="CZ">Czech Republic</option>
+						<option value="DK">Denmark</option>
+						<option value="DJ">Djibouti</option>
+						<option value="DM">Dominica</option>
+						<option value="DO">Dominican Republic</option>
+						<option value="EC">Ecuador</option>
+						<option value="EG">Egypt</option>
+						<option value="SV">El Salvador</option>
+						<option value="GQ">Equatorial Guinea</option>
+						<option value="ER">Eritrea</option>
+						<option value="EE">Estonia</option>
+						<option value="ET">Ethiopia</option>
+						<option value="FK">Falkland Islands (Malvinas)</option>
+						<option value="FO">Faroe Islands</option>
+						<option value="FJ">Fiji</option>
+						<option value="FI">Finland</option>
+						<option value="FR">France</option>
+						<option value="GF">French Guiana</option>
+						<option value="PF">French Polynesia</option>
+						<option value="TF">French Southern Territories</option>
+						<option value="GA">Gabon</option>
+						<option value="GM">Gambia</option>
+						<option value="GE">Georgia</option>
+						<option value="DE">Germany</option>
+						<option value="GH">Ghana</option>
+						<option value="GI">Gibraltar</option>
+						<option value="GR">Greece</option>
+						<option value="GL">Greenland</option>
+						<option value="GD">Grenada</option>
+						<option value="GP">Guadeloupe</option>
+						<option value="GU">Guam</option>
+						<option value="GT">Guatemala</option>
+						<option value="GG">Guernsey</option>
+						<option value="GN">Guinea</option>
+						<option value="GW">Guinea-Bissau</option>
+						<option value="GY">Guyana</option>
+						<option value="HT">Haiti</option>
+						<option value="HM">Heard Island and McDonald Islands</option>
+						<option value="VA">Holy See (Vatican City State)</option>
+						<option value="HN">Honduras</option>
+						<option value="HK">Hong Kong</option>
+						<option value="HU">Hungary</option>
+						<option value="IS">Iceland</option>
+						<option value="IN">India</option>
+						<option value="ID">Indonesia</option>
+						<option value="IR">Iran, Islamic Republic of</option>
+						<option value="IQ">Iraq</option>
+						<option value="IE">Ireland</option>
+						<option value="IM">Isle of Man</option>
+						<option value="IL">Israel</option>
+						<option value="IT">Italy</option>
+						<option value="JM">Jamaica</option>
+						<option value="JP">Japan</option>
+						<option value="JE">Jersey</option>
+						<option value="JO">Jordan</option>
+						<option value="KZ">Kazakhstan</option>
+						<option value="KE">Kenya</option>
+						<option value="KI">Kiribati</option>
+						<option value="KP">Korea, Democratic People's Republic of</option>
+						<option value="KR">Korea, Republic of</option>
+						<option value="KW">Kuwait</option>
+						<option value="KG">Kyrgyzstan</option>
+						<option value="LA">Lao People's Democratic Republic</option>
+						<option value="LV">Latvia</option>
+						<option value="LB">Lebanon</option>
+						<option value="LS">Lesotho</option>
+						<option value="LR">Liberia</option>
+						<option value="LY">Libya</option>
+						<option value="LI">Liechtenstein</option>
+						<option value="LT">Lithuania</option>
+						<option value="LU">Luxembourg</option>
+						<option value="MO">Macao</option>
+						<option value="MK">Macedonia, the former Yugoslav Republic of</option>
+						<option value="MG">Madagascar</option>
+						<option value="MW">Malawi</option>
+						<option value="MY">Malaysia</option>
+						<option value="MV">Maldives</option>
+						<option value="ML">Mali</option>
+						<option value="MT">Malta</option>
+						<option value="MH">Marshall Islands</option>
+						<option value="MQ">Martinique</option>
+						<option value="MR">Mauritania</option>
+						<option value="MU">Mauritius</option>
+						<option value="YT">Mayotte</option>
+						<option value="MX">Mexico</option>
+						<option value="FM">Micronesia, Federated States of</option>
+						<option value="MD">Moldova, Republic of</option>
+						<option value="MC">Monaco</option>
+						<option value="MN">Mongolia</option>
+						<option value="ME">Montenegro</option>
+						<option value="MS">Montserrat</option>
+						<option value="MA">Morocco</option>
+						<option value="MZ">Mozambique</option>
+						<option value="MM">Myanmar</option>
+						<option value="NA">Namibia</option>
+						<option value="NR">Nauru</option>
+						<option value="NP">Nepal</option>
+						<option value="NL">Netherlands</option>
+						<option value="NC">New Caledonia</option>
+						<option value="NZ">New Zealand</option>
+						<option value="NI">Nicaragua</option>
+						<option value="NE">Niger</option>
+						<option value="NG">Nigeria</option>
+						<option value="NU">Niue</option>
+						<option value="NF">Norfolk Island</option>
+						<option value="MP">Northern Mariana Islands</option>
+						<option value="NO">Norway</option>
+						<option value="OM">Oman</option>
+						<option value="PK">Pakistan</option>
+						<option value="PW">Palau</option>
+						<option value="PS">Palestinian Territory, Occupied</option>
+						<option value="PA">Panama</option>
+						<option value="PG">Papua New Guinea</option>
+						<option value="PY">Paraguay</option>
+						<option value="PE">Peru</option>
+						<option value="PH">Philippines</option>
+						<option value="PN">Pitcairn</option>
+						<option value="PL">Poland</option>
+						<option value="PT">Portugal</option>
+						<option value="PR">Puerto Rico</option>
+						<option value="QA">Qatar</option>
+						<option value="RE">Réunion</option>
+						<option value="RO">Romania</option>
+						<option value="RU">Russian Federation</option>
+						<option value="RW">Rwanda</option>
+						<option value="BL">Saint Barthélemy</option>
+						<option value="SH">Saint Helena, Ascension and Tristan da Cunha</option>
+						<option value="KN">Saint Kitts and Nevis</option>
+						<option value="LC">Saint Lucia</option>
+						<option value="MF">Saint Martin (French part)</option>
+						<option value="PM">Saint Pierre and Miquelon</option>
+						<option value="VC">Saint Vincent and the Grenadines</option>
+						<option value="WS">Samoa</option>
+						<option value="SM">San Marino</option>
+						<option value="ST">Sao Tome and Principe</option>
+						<option value="SA">Saudi Arabia</option>
+						<option value="SN">Senegal</option>
+						<option value="RS">Serbia</option>
+						<option value="SC">Seychelles</option>
+						<option value="SL">Sierra Leone</option>
+						<option value="SG">Singapore</option>
+						<option value="SX">Sint Maarten (Dutch part)</option>
+						<option value="SK">Slovakia</option>
+						<option value="SI">Slovenia</option>
+						<option value="SB">Solomon Islands</option>
+						<option value="SO">Somalia</option>
+						<option value="ZA">South Africa</option>
+						<option value="GS">South Georgia and the South Sandwich Islands</option>
+						<option value="SS">South Sudan</option>
+						<option value="ES">Spain</option>
+						<option value="LK">Sri Lanka</option>
+						<option value="SD">Sudan</option>
+						<option value="SR">Suriname</option>
+						<option value="SJ">Svalbard and Jan Mayen</option>
+						<option value="SZ">Swaziland</option>
+						<option value="SE">Sweden</option>
+						<option value="CH">Switzerland</option>
+						<option value="SY">Syrian Arab Republic</option>
+						<option value="TW">Taiwan, Province of China</option>
+						<option value="TJ">Tajikistan</option>
+						<option value="TZ">Tanzania, United Republic of</option>
+						<option value="TH">Thailand</option>
+						<option value="TL">Timor-Leste</option>
+						<option value="TG">Togo</option>
+						<option value="TK">Tokelau</option>
+						<option value="TO">Tonga</option>
+						<option value="TT">Trinidad and Tobago</option>
+						<option value="TN">Tunisia</option>
+						<option value="TR">Turkey</option>
+						<option value="TM">Turkmenistan</option>
+						<option value="TC">Turks and Caicos Islands</option>
+						<option value="TV">Tuvalu</option>
+						<option value="UG">Uganda</option>
+						<option value="UA">Ukraine</option>
+						<option value="AE">United Arab Emirates</option>
+						<option value="GB">United Kingdom</option>
+						<option value="US">United States</option>
+						<option value="UM">United States Minor Outlying Islands</option>
+						<option value="UY">Uruguay</option>
+						<option value="UZ">Uzbekistan</option>
+						<option value="VU">Vanuatu</option>
+						<option value="VE">Venezuela, Bolivarian Republic of</option>
+						<option value="VN">Viet Nam</option>
+						<option value="VG">Virgin Islands, British</option>
+						<option value="VI">Virgin Islands, U.S.</option>
+						<option value="WF">Wallis and Futuna</option>
+						<option value="EH">Western Sahara</option>
+						<option value="YE">Yemen</option>
+						<option value="ZM">Zambia</option>
+						<option value="ZW">Zimbabwe</option>
+					</select>
+
+
+
+
+				</div>
+
+				<!-- //reCaptcha -->
+				<!-- <div class="g-recaptcha" data-sitekey="6LegEqkUAAAAAM26uqgIyMEXH5ujQDY53okuRKgB"></div><br> -->
+				<div class="form-check-inline">
+					<label class="form-check-label">By signing up you agree with our <a href="#">Terms of Service</a>
+						and <a href="#">Privacy policy</a>.</label>
+				</div>
+
+				<!-- <button class="btn btn-primary" >Register Now</button> -->
+				<center>
+					<div class="buttons-w">
+						<button id="send_email" type="submit" class="btn btn-primary">Register Now</button>
+					</div>
+				</center><br><br>
+				<div class="form-check-inline">
+					<label class="form-check-label">Already have an account? <a href="/login">Login</a>.</label>
+				</div>
+			</form>
+			<center><span id="message"></span></center>
+		</div>
+		<div class="mssg bg-danger">
+			<span id="check"></span>
+		</div>
+
+		<div id="LangTable"><a href="/login" id="aa"></a>
+		</div>
+
+
+</body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LegEqkUAAAAAM26uqgIyMEXH5ujQDY53okuRKgB"></script>
+
+<script>
+
+$(document).ready(function() {
+
+	// $('#Country').on('change',function(){
+    //     //var optionValue = $(this).val();
+    //     //var optionText = $('#dropdownList option[value="'+optionValue+'"]').text();
+    //     var optionText = $("#Country option:selected").text();
+	// 	//alert("Selected Option Text: "+optionText);
+	// 	console.log(optionText);
+    // });
+
+$('#formreg').submit(function(e) {first_form
+  e.preventDefault();
+  var name = $('#name').val();
+ // var last_name = $('#email').val();
+ // var email = $('#email').val();
+  //var password = $('#password').val();
+
+// $(".error").remove();
+
+  if (name.length < 1) {
+	$('#name').after('<span class="error">This field is required</span>');
+  }
+//   if (last_name.length < 1) {
+// 	$('#email').after('<span class="error">This field is required</span>');
+//   }
+//   if (email.length < 1) {
+// 	$('#email').after('<span class="error">This field is required</span>');
+//   } else {
+// 	var regEx = /^[A-Z0-9][A-Z0-9._%+-]{0,63}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/;
+// 	var validEmail = regEx.test(email);
+// 	if (!validEmail) {
+// 	  $('#email').after('<span class="error">Enter a valid email</span>');
+// 	}
+//   }	
+//   if (password.length < 8) {
+// 	$('#password').after('<span class="error">Password must be at least 8 characters long</span>');
+//   }
+});
+
+});
+
+	grecaptcha.ready(function () {
+		console.log('inside ready');
+		grecaptcha.execute('6LegEqkUAAAAAM26uqgIyMEXH5ujQDY53okuRKgB', { action: 'login' }).then(function (token) {
+			console.log(token);
+			$('#formreg').prepend('<input type="hidden" name="g-recaptcha-response-v3" value="' + token + '">');
+		});
+	});
+
+
+
+		$(document).ready(function () {
+			// swal.fire("Hello world!");
+			var from, to, subject, text;
+			$("#send_email").click(function () {
+				to = $("#to").val();
+				$("#message").text("Sending E-mail...Please wait");
+				$.get("http://localhost:3000/", { to: to }, function (data) {
+					if (data == "sent") {
+						$("#message").empty().html("<p>Email is been sent at " + to + " . Please check inbox !</p>");
+					}
+				});
+			});
+		});
+
+
+		function checkPass() {
+			var pass1 = document.getElementById('pass1');
+			var pass2 = document.getElementById('pass2');
+			var message = document.getElementById('error-nwl');
+			var goodColor = "#66cc66";
+			var badColor = "#ff6666";
+
+			if (pass1.value.length > 1) {
+				pass1.style.backgroundColor = goodColor;
+				message.style.color = goodColor;
+				message.innerHTML = "character number ok!"
+			}
+			else {
+				pass1.style.backgroundColor = badColor;
+				message.style.color = badColor;
+				message.innerHTML = " you have to enter at least 6 digit!"
+				return;
+			}
+
+			if (pass1.value == pass2.value) {
+				pass2.style.backgroundColor = goodColor;
+				message.style.color = goodColor;
+				message.innerHTML = "ok!"
+			}
+			else {
+				pass2.style.backgroundColor = badColor;
+				message.style.color = badColor;
+				message.innerHTML = " These passwords don't match"
+			}
+		}  
+</script>
+</html>
