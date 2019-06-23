@@ -198,7 +198,7 @@ console.log('options'+personInfo.country);
 					// g-recaptcha-response is the key that browser will generate upon form submit.
 					//	if its blank or null means user has not selected the captcha, so return the error.
 					// console.log('req.body ' + personInfo.passwordConf);
-					 console.log(req.body['g-recaptcha-response-v3']);
+					// console.log(req.body['g-recaptcha-response-v3']);
 					      if(req.body['g-recaptcha-response-v3'] === undefined || req.body['g-recaptcha-response-v3'] === '' || req.body['g-recaptcha-response-v3'] === null) {
 					        return res.json({"responseCode" : 1,"responseDesc" : "Please select captcha"});
 					      }
@@ -217,7 +217,7 @@ console.log('options'+personInfo.country);
 						}
 
 						request(clientServerOptions, function (error, response) {
-							console.log(error,response.body);
+							//console.log(error,response.body);
 							return;
 						});
 				// request.post( { headers: {'content-type' : 'application/json'} ,

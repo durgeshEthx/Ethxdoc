@@ -10,6 +10,8 @@ var MongoStore = require('connect-mongo')(session);
 global.appRoot = path.resolve(__dirname);
 
 mongoose.connect('mongodb://localhost/ManualAuth', { useNewUrlParser: true });
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
