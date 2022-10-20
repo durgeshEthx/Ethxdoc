@@ -23,7 +23,7 @@
     "image-to-base64": "^2.0.1",
     "md5": "^2.2.1",
     "mongodb": "^3.2.7",
-    "mongoose": "^5.5.13",
+    "mongoose": "^4.13.21",
     "multer": "^1.4.1",
     "nodemailer": "^6.2.1",
     "office-converter": "^1.0.2",
