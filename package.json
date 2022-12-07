@@ -12,7 +12,7 @@
     "dynamic-watermark": "^1.0.0",
     "ejs": "^2.6.1",
     "email-verification": "^0.4.6",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-recaptcha": "^5.0.0",
     "express-session": "^1.16.1",
     "fs-extra": "^8.0.1",
